@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/kinolist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/personlist.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Список режисеров</h2>
+
+        <ul>
+        {% for one in modeldirector_list %}
+            <div class="card">
+            <li>
+                <div class="main">
+                    <div class="name">
+                    <a href="{{ one.getUrl }}">{{ one.name }}</a>
+                </div>
+                <div class="photo">
+                    <img src="{% static one.photo %}" alt="" width="200px">
+                </div>
+                </div>
+            </li>
+            </div>
+        {% endfor %}
+        </ul>
+    {% for contact in page_obj %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+    ...
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><--</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">--></a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

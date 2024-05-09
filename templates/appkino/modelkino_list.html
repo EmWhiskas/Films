@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/kinolist.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>Каталог фильмов</h2>
+
+        <ul>
+        {% for one in modelkino_list %}
+            <div class="card">
+            <li>
+                <a href="{{ one.getUrl }}">{{ one.name }}</a>
+                <p>{{ one.director }}</p>
+            </li>
+             </div>
+        {% endfor %}
+        </ul>
+
+
+{% endblock %}

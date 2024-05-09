@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+img {
+    max-width: 100%; /* Максимальная ширина изображения */
+    height: auto; /* Автоматическая высота, сохраняющая пропорции */
+    display: block; /* Изображение будет отображаться как блочный элемент */
+    margin-right: auto; /* Центрирование изображения по горизонтали */
+    margin-left: auto;
+    margin-top: 25px;
+
+}
+
+/* Стили для тега h2 */
+h2 {
+    font-size: 24px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    margin: 20px;
+    text-align: center;
+}
+
+/* Стили для тега h3 */
+h3 {
+    font-size: 20px; /* Размер шрифта */
+    font-weight: normal; /* Обычный шрифт */
+    margin-top: 5px;
+}
+
+/* Стили для тега ul */
+ul {
+    list-style-type: disc; /* Тип маркера для списка */
+    margin: 0; /* Убираем внешние отступы */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+/* Стили для тега li */
+li {
+    margin-bottom: 5px; /* Внутренний отступ снизу между элементами списка */
+}
+
+.info{
+    padding: 25px;
+    background-color: aliceblue;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 25px;
+}
+.trailer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

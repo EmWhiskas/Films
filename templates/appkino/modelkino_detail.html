@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/kinodetail.css' %}">
+{% endblock %}
+{% block content %}
+    <img src="{% static modelkino.poster %}" alt="" width="300">
+    <h2>{{ modelkino.name }}</h2>
+    <div class="info">
+        <h3><b>Жанр:</b>{{ modelkino.genre }}</h3>
+        <h3><b>Режиссер:</b>Режиссер:{{ modelkino.director }}</h3>
+        <h3><b>Страна:</b>{{ modelkino.country }}</h3>
+        <h3><b>Год:</b>{{ modelkino.year }}</h3>
+        <h3>Актеры</h3>
+        <h4>Подписка пользователся {{ user.modelprofile.podpiska }}</h4>
+        <h4>{{ modelkino.podpiska.id }}</h4>
+        <h4>{{ user.modelprofile.podpiska.id }}</h4>
+{#        <ul>#}
+{#            {% for one in modelkino.actor.all %}#}
+{#                <li>#}
+{#                    {{ one.name }}#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+        <h3>Рейтинг: {{ modelkino.rating }}</h3>
+        <h3>Подробнее: {{ modelkino.info }}</h3>
+        <h3>Подписка:{{ modelkino.podpiska }}</h3>
+        {% if user.is_authenticated %}
+
+
+        {% if user.modelprofile.podpiska.id >= modelkino.podpiska.id %}
+            <div class="trailer">
+            <h2>Трейлер</h2>
+            <iframe width="560" height="315" src="{{ modelkino.file }}" allowfullscreen></iframe>
+            </div>
+
+            {% else %}
+            <h2>Купите подписку</h2>
+            <a href="{% url 'cabinet' %}"><button>Ссылка</button></a>
+        {% endif %}
+    </div>
+    {% else %}
+            <h3>Чтобы смотреть, вы должны быть авторизованны</h3>
+            <a href="{% url 'login' %}"><button>ссылка</button></a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'otziv'  modelkino.id%}" method="post">
+            {% csrf_token %}
+            {{ modelkino.getForm }}
+            <input type="submit" value="Отправить">
+    </form>
+    {% endif %}
+
+
+    {% for one in modelkino.getOtziv  %}
+        <div>
+        <h4>{{ one.user }}</h4>
+        <p>{{ one.text }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
